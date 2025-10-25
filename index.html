@@ -17,38 +17,37 @@
     }
 
     .polaroid-frame {
-      display: inline-block;
-      /* Adjusted vertical padding to account for shorter, wider video screen */
-      padding: 40px; 
+      display: block;
+      padding: 0;
       
-      /* Use the background image */
-      background: url("./frame2.png") no-repeat center;
-      background-size: 100% 100%; /* Cover the entire element with the image */
+      /* Set fixed dimensions based on the expected size of your frame image */
+      width: 550px; 
+      height: 450px; /* Adjust this height based on your frame1.png image */
+      
+      /* Use the background image to create the frame effect */
+      background: url("./frame1.png") no-repeat center;
+      background-size: 100% 100%; 
       
       box-shadow: 0 8px 15px rgba(0,0,0,0.3);
       border-radius: 12px;
       text-align: center;
-      /* Set a fixed size for the entire polaroid frame */
-      width: 550px; /* Increased width to accommodate the landscape video */
-      height: auto;
-      position: relative;
+      position: relative; /* Essential for absolutely positioning the video inside */
     }
 
-    .photo-border {
-      position: relative;
-      background: black; 
-      border-radius: 6px;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-    }
+    /* We don't need photo-border anymore, we place the video directly */
 
     .video-screen-wrapper {
-        width: 100%;
-        /* FIX: 16:9 aspect ratio hack: padding-bottom = 9/16 * 100% = 56.25% */
+        /* Set position absolute and coordinates to place the video in the frame's photo hole */
+        position: absolute;
+        top: 40px;   /* Estimated distance from the top of the frame */
+        left: 40px;  /* Estimated distance from the left of the frame */
+        
+        width: 80%; /* Estimated width of the photo hole within the frame (Adjust as needed) */
+        
+        /* 16:9 aspect ratio hack: padding-bottom = 9/16 * 100% = 56.25% */
         padding-bottom: 56.25%; 
         height: 0;
-        position: relative;
+        
         overflow: hidden;
         border-radius: 6px;
         background: #000;
@@ -68,12 +67,11 @@
     .video-player {
       width: 100%;
       height: 100%;
-      /* Use 'cover' to fill the container perfectly */
-      object-fit: cover; 
+      object-fit: cover; /* Fills the 16:9 container perfectly */
       border-radius: 6px;
     }
 
-    /* Retro scanline effect (optional) */
+    /* Scan lines and Vignette remain the same */
     .scan-lines {
       position: absolute;
       top: 0;
@@ -90,7 +88,6 @@
       pointer-events: none;
     }
 
-    /* Vignette effect */
     .vignette {
       position: absolute;
       top: 0;
@@ -102,7 +99,11 @@
     }
 
     .polaroid-caption {
-      margin-top: 12px;
+      /* Position the caption outside of the video area, near the bottom of the frame */
+      position: absolute;
+      bottom: 20px; /* Estimated distance from the bottom */
+      left: 50%;
+      transform: translateX(-50%);
       color: #5c3a1c;
     }
 
@@ -124,7 +125,7 @@
     <div class="video-screen-wrapper">
         <div class="video-screen">
             <video class="video-player" controls controlslist="nodownload">
-              <source src="./Bhavya2.mp4" type="video/mp4">
+              <source src="./1000176071.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <div class="scan-lines"></div>
