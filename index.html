@@ -13,41 +13,53 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: #f4e9dc;
+      background: #f4e9dc; /* This color will show around the frame */
     }
 
     .polaroid-frame {
-      display: block;
-      padding: 0;
+      display: inline-block;
       
-      /* Set fixed dimensions based on the expected size of your frame image */
-      width: 550px; 
-      height: 450px; /* Adjust this height based on your frame1.png image */
+      /* FIX 1: Set a margin/gap to clearly separate the frame from the window edges */
+      margin: 20px; 
+
+      /* Adjusted padding for better look, based on a landscape video */
+      padding: 30px; 
       
-      /* Use the background image to create the frame effect */
+      /* Use the background image to form the frame */
       background: url("./frame1.png") no-repeat center;
-      background-size: 100% 100%; 
+      /* FIX 2: Use 'contain' or '100% 100%' depending on your image */
+      /* 'contain' is often safer for custom images to prevent cropping */
+      background-size: contain; 
+      
+      /* Optional: Fallback color if the image fails */
+      background-color: white; 
       
       box-shadow: 0 8px 15px rgba(0,0,0,0.3);
       border-radius: 12px;
       text-align: center;
-      position: relative; /* Essential for absolutely positioning the video inside */
+      /* Set a fixed size for the entire polaroid frame */
+      width: 550px; 
+      height: auto;
+      position: relative;
     }
 
-    /* We don't need photo-border anymore, we place the video directly */
+    .photo-border {
+      /* This element is no longer needed as a separate border if the image is the frame, 
+         but we'll keep it for structure and positioning. */
+      position: relative;
+      background: black; 
+      border-radius: 6px;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
 
     .video-screen-wrapper {
-        /* Set position absolute and coordinates to place the video in the frame's photo hole */
-        position: absolute;
-        top: 40px;   /* Estimated distance from the top of the frame */
-        left: 40px;  /* Estimated distance from the left of the frame */
-        
-        width: 80%; /* Estimated width of the photo hole within the frame (Adjust as needed) */
-        
+        width: 100%;
         /* 16:9 aspect ratio hack: padding-bottom = 9/16 * 100% = 56.25% */
         padding-bottom: 56.25%; 
         height: 0;
-        
+        position: relative;
         overflow: hidden;
         border-radius: 6px;
         background: #000;
@@ -67,12 +79,13 @@
     .video-player {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Fills the 16:9 container perfectly */
+      object-fit: cover; 
       border-radius: 6px;
     }
 
-    /* Scan lines and Vignette remain the same */
+    /* Retro scanline effect (optional) */
     .scan-lines {
+      /* ... (styles remain the same) ... */
       position: absolute;
       top: 0;
       left: 0;
@@ -88,7 +101,9 @@
       pointer-events: none;
     }
 
+    /* Vignette effect */
     .vignette {
+      /* ... (styles remain the same) ... */
       position: absolute;
       top: 0;
       left: 0;
@@ -99,11 +114,7 @@
     }
 
     .polaroid-caption {
-      /* Position the caption outside of the video area, near the bottom of the frame */
-      position: absolute;
-      bottom: 20px; /* Estimated distance from the bottom */
-      left: 50%;
-      transform: translateX(-50%);
+      margin-top: 12px;
       color: #5c3a1c;
     }
 
@@ -125,7 +136,7 @@
     <div class="video-screen-wrapper">
         <div class="video-screen">
             <video class="video-player" controls controlslist="nodownload">
-              <source src="./Bhavya.mp4" type="video/mp4">
+              <source src="./Bhavya2.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
             <div class="scan-lines"></div>
