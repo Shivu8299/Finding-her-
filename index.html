@@ -18,34 +18,35 @@
 
     .polaroid-frame {
       display: inline-block;
-      /* Adjusted padding to give space for the background image frame */
+      /* Adjusted vertical padding to account for shorter, wider video screen */
       padding: 40px; 
       
       /* Use the background image */
       background: url("./frame2.png") no-repeat center;
-      background-size: 100% 100%; /* Stretch the image to fit the element */
+      background-size: 100% 100%; /* Cover the entire element with the image */
       
       box-shadow: 0 8px 15px rgba(0,0,0,0.3);
       border-radius: 12px;
       text-align: center;
-      /* Set a fixed size for the entire polaroid to better contain the image */
-      width: 380px; 
+      /* Set a fixed size for the entire polaroid frame */
+      width: 550px; /* Increased width to accommodate the landscape video */
       height: auto;
-      position: relative; 
+      position: relative;
     }
 
     .photo-border {
-      /* This is now a simple container */
       position: relative;
-      background: white; /* Inner white border */
+      background: black; 
       border-radius: 6px;
-      padding: 5px; /* Added slight inner white padding */
+      padding: 0;
+      width: 100%;
+      height: 100%;
     }
-    
+
     .video-screen-wrapper {
         width: 100%;
-        /* ASPECT RATIO HACK for 9:16 vertical video: padding-bottom = 16/9 * 100% = 177.77% */
-        padding-bottom: 177.77%; 
+        /* FIX: 16:9 aspect ratio hack: padding-bottom = 9/16 * 100% = 56.25% */
+        padding-bottom: 56.25%; 
         height: 0;
         position: relative;
         overflow: hidden;
@@ -54,7 +55,6 @@
     }
 
     .video-screen {
-      /* Absolute positioning allows this to fill the wrapper, whose height is defined by padding-bottom */
       position: absolute;
       top: 0;
       left: 0;
@@ -68,7 +68,7 @@
     .video-player {
       width: 100%;
       height: 100%;
-      /* 'cover' now works perfectly because the container has the same 9:16 ratio */
+      /* Use 'cover' to fill the container perfectly */
       object-fit: cover; 
       border-radius: 6px;
     }
@@ -121,16 +121,14 @@
 </head>
 <body>
   <div class="polaroid-frame">
-    <div class="photo-border">
-        <div class="video-screen-wrapper">
-            <div class="video-screen">
-                <video class="video-player" controls controlslist="nodownload">
-                  <source src="./Bhavya2.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-                <div class="scan-lines"></div>
-                <div class="vignette"></div>
-            </div>
+    <div class="video-screen-wrapper">
+        <div class="video-screen">
+            <video class="video-player" controls controlslist="nodownload">
+              <source src="./Bhavya2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <div class="scan-lines"></div>
+            <div class="vignette"></div>
         </div>
     </div>
 
