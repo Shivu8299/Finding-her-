@@ -13,56 +13,47 @@
       justify-content: center;
       align-items: center;
       min-height: 100vh;
-      background: #f4e9dc; /* This color will show around the frame */
+      background: #f4e9dc; /* Page background color */
     }
 
     .polaroid-frame {
       display: inline-block;
-      
-      /* FIX 1: Set a margin/gap to clearly separate the frame from the window edges */
       margin: 20px; 
-
-      /* Adjusted padding for better look, based on a landscape video */
-      padding: 30px; 
       
-      /* Use the background image to form the frame */
-      background: url("./frame1.png") no-repeat center;
-      /* FIX 2: Use 'contain' or '100% 100%' depending on your image */
-      /* 'contain' is often safer for custom images to prevent cropping */
-      background-size: contain; 
+      /* Adjusted padding for a vertical look */
+      padding: 30px 30px 50px 30px; 
       
-      /* Optional: Fallback color if the image fails */
-      background-color: white; 
+      /* FIX: **Check this path!** The image must be in the same folder as this HTML file. */
+      background: url("./frame2.png") no-repeat center;
+      background-size: 100% 100%; /* Stretch the image to cover the frame area */
+      
+      background-color: white; /* Fallback color if the image fails to load */
       
       box-shadow: 0 8px 15px rgba(0,0,0,0.3);
       border-radius: 12px;
       text-align: center;
-      /* Set a fixed size for the entire polaroid frame */
-      width: 550px; 
+      /* Adjusted width for the vertical video */
+      width: 350px; 
       height: auto;
       position: relative;
     }
 
-    .photo-border {
-      /* This element is no longer needed as a separate border if the image is the frame, 
-         but we'll keep it for structure and positioning. */
-      position: relative;
-      background: black; 
-      border-radius: 6px;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-    }
-
     .video-screen-wrapper {
         width: 100%;
-        /* 16:9 aspect ratio hack: padding-bottom = 9/16 * 100% = 56.25% */
-        padding-bottom: 56.25%; 
+        /* FIX: 9:16 aspect ratio hack (Vertical Video): padding-bottom = 16/9 * 100% = 177.77% */
+        padding-bottom: 177.77%; 
         height: 0;
         position: relative;
         overflow: hidden;
         border-radius: 6px;
         background: #000;
+    }
+    
+    .photo-border {
+        /* No longer strictly needed for border, but useful structural container */
+        background: none; 
+        padding: 0; 
+        border-radius: 6px;
     }
 
     .video-screen {
@@ -83,9 +74,8 @@
       border-radius: 6px;
     }
 
-    /* Retro scanline effect (optional) */
+    /* Retro scanline and vignette styles remain the same... */
     .scan-lines {
-      /* ... (styles remain the same) ... */
       position: absolute;
       top: 0;
       left: 0;
@@ -101,9 +91,7 @@
       pointer-events: none;
     }
 
-    /* Vignette effect */
     .vignette {
-      /* ... (styles remain the same) ... */
       position: absolute;
       top: 0;
       left: 0;
